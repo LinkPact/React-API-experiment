@@ -14,10 +14,12 @@ function sendAPIRequest(target_url) {
         },
         credentials: "jakob:djangodjango"
     })
+    .then(response => response.json())
     .then(
-        function(response) {
-            console.log("Returning: " + response.json());
-            return response;
+        function(responseData) {
+            console.log(responseData);
+
+            return responseData;
         }, 
         function(error) {
             console.log("Problem with operation: " + error.message);
