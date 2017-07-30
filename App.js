@@ -1,6 +1,31 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, Button } from 'react-native';
 
+
+
+function sendAPIRequest(target_url) {
+
+    console.log("Requesting URL: " + target_url);
+        
+    fetch(target_url, {
+        method: "GET",
+        heads: {
+            "Content-Type": "application/json"
+        },
+        credentials: "jakob:djangodjango"
+    })
+    .then(
+        function(response) {
+            console.log("Returning: " + response.json());
+            return response;
+        }, 
+        function(error) {
+            console.log("Problem with operation: " + error.message);
+        }
+    );
+}
+
+
 export default class PizzaTranslator extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +55,7 @@ export default class PizzaTranslator extends Component {
             <Text></Text>
 
             <Button 
-                onPress={this.sendAPIRequest}
+                onPress={this.sendAPIRequestClick}
                 title="Send API request"
                 color="#005500"
                 accessibilityLabel="Send test API request"
@@ -46,35 +71,9 @@ export default class PizzaTranslator extends Component {
         console.log("Pressed!");
     }
 
-    sendAPIRequest(event) {
 
-        var target_url = "http://192.168.1.103:8000"
-
-        console.log("Requesting URL: " + target_url);
-        
-        var output = fetch(target_url)
-        .then(
-            function(response) {
-                return response.text();
-            }, 
-            function(error) {
-                console.log("Problem with operation: " + error.message);
-            }
-        );
-
-        console.log("Result: " + output.status);
-
-        /*
-        fetch("http://localhost:8000/app/users/", {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                
-            })
-        })
-        */
+    sendAPIRequestClick(event) {        
+        var target_url = "http://192.168.1.103/app/users/"
+        sendAPIRequest(target_url);
     }
 }
