@@ -1,6 +1,7 @@
 class HabitEntry {
 
-    constructor() {
+    constructor(id) {
+        this.id = id;
         this.status = 'unfinished';
     }
 

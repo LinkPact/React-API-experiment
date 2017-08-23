@@ -1,6 +1,7 @@
 class Habit {
 
-    constructor(name, descr) {
+    constructor(id, name, descr) {
+        this.id = id;
         this.name = name;
         this.descr = descr;
         this.habitEntries = this.initializeHabitEntries(2017);
