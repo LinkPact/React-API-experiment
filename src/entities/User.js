@@ -1,7 +1,7 @@
 class User {
 
-    constructor(id, name) {
-        this.id = id;
+    constructor(userID, name) {
+        this.userID = userID;
         this.name = name;
         this.habits = [];
     }

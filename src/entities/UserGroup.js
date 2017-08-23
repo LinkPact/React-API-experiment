@@ -1,7 +1,7 @@
 class UserGroup {
 
-    constructor(id, name) {
-        this.id = id;
+    constructor(groupID, name) {
+        this.groupID = groupID;
         this.name = name;
         this.users = [];
     }
