@@ -9,3 +9,5 @@ npm-debug.*
 .watchmanconfig
 .flowconfig
 .babelrc
+
+android/
