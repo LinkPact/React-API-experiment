@@ -28,7 +28,7 @@ function sendAPIRequest(target_url) {
 }
 
 
-export default class PizzaTranslator extends Component {
+export default class APITest extends Component {
     constructor(props) {
         super(props);
         this.state = {text: ''};
@@ -79,3 +79,4 @@ export default class PizzaTranslator extends Component {
         sendAPIRequest(target_url);
     }
 }
+

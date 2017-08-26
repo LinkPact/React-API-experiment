@@ -2,6 +2,7 @@ node_modules/
 .expo/
 npm-debug.*
 .idea/
+android/
 
 *.swp
 
