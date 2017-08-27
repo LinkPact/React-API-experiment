@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Navigator, Button } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
+import sendAPIRequestClick from '../../src/api/api_draft.js';
 
 
 export default class HomeScreen extends React.Component {
@@ -27,6 +28,13 @@ export default class HomeScreen extends React.Component {
 		          		navigate('CreateCalendar')
 		        	}
 	      		/>
+                        <Button 
+                            onPress={sendAPIRequestClick}
+                            title="Send dummy API request"
+                            color="#005500"
+                            accessibilityLabel="Send dummy API request"
+                            style={{padding:5}}
+                        />
       		</View>
     	);
   	}
