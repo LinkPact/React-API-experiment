@@ -1,19 +1,31 @@
-import React from 'react';
-import { StyleSheet, Text, View, Navigator, Button } from 'react-native';
-import CalendarScreen from './components/screens/CalendarScreen';
-import HomeScreen from './components/screens/HomeScreen';
-import CreateCalendarScreen from './components/screens/CreateCalendarScreen';
-import {
-	StackNavigator,
-} from 'react-navigation';
+import React, { Component }from 'react';
+import { Text, TextInput, View, Button } from 'react-native';
 
+function sendAPIRequest(target_url) {
 
+    console.log("Requesting URL: " + target_url);
+        
+    fetch(target_url, {
+        method: "GET",
+        heads: {
+            "Content-Type": "application/json"
+        },
+        credentials: "jakob:djangodjango"
+    })
+    .then(response => response.json())
+    .then(
+        function(responseData) {
+            console.log(responseData);
 
+            return responseData;
+        }, 
+        function(error) {
+            console.log("Problem with operation: " + error.message);
+        }
+    );
+}
 
-
-
-/*
-export default class APITest extends Component {
+export default class PizzaTranslator extends Component {
     constructor(props) {
         super(props);
         this.state = {text: ''};
@@ -54,6 +66,9 @@ export default class APITest extends Component {
         );
     }
 
+
+
+
     onPressLearnMore(event) {
         console.log("Pressed!");
     }
@@ -64,11 +79,3 @@ export default class APITest extends Component {
         sendAPIRequest(target_url);
     }
 }
-*/
-
-const App = StackNavigator({
-  Home: { screen: HomeScreen },
-  Calendar: { screen: CalendarScreen },
-  CreateCalendar: { screen: CreateCalendarScreen },
-});
-export default App;

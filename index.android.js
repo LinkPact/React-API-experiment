@@ -11,6 +11,9 @@ import {
   View
 } from 'react-native';
 
-import APITest from './App';
+// import APITest from './App';
+// AppRegistry.registerComponent('APIExample', () => APITest);
 
-AppRegistry.registerComponent('APIExample', () => APITest);
+import StackNavigator from './App';
+
+AppRegistry.registerComponent('APIExample', () => StackNavigator);

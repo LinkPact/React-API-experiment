@@ -10,3 +10,5 @@ android/
 .watchmanconfig
 .flowconfig
 .babelrc
+
+android/
