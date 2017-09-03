@@ -2,6 +2,8 @@
 
 * react-native-git-upgrade - Upgrade the React Native to latest stable (in theory gracefully)
 * react-native-rename <new name> - Rename project, requires prior install through npm
+* Connect to console output: adb logcat `*:S ReactNative:V ReactNativeJS:V`
+    * Add "grep \^I" to get only console printing
 
 # Issues
 

@@ -1,4 +1,4 @@
-class User {
+export default class User {
 
     constructor(userID, name) {
         this.userID = userID;
@@ -10,3 +10,4 @@ class User {
         this.habits.add(habit);
     };
 }
+

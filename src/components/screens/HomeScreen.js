@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Navigator, Button } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
-import sendAPIRequestClick from '../../src/api/api_draft.js';
-
+import { printDebugMessage } from '../../api/DatabaseAPI';
 
 export default class HomeScreen extends React.Component {
 	static navigationOptions = {
@@ -12,9 +11,10 @@ export default class HomeScreen extends React.Component {
 	};
 	render() {
 		const { navigate } = this.props.navigation;
+		// const { debug } = this.printDebugMessage.bind(this);
 		return (
     		<View style={{flex: 1}}>
-    			<Text>Random stuff</Text>
+    			<Text>Random stuff!!</Text>
     			<Text>Login screen</Text>
 	     		<Button
 		        	title="Join a Calendar"
@@ -28,14 +28,15 @@ export default class HomeScreen extends React.Component {
 		          		navigate('CreateCalendar')
 		        	}
 	      		/>
-                        <Button 
-                            onPress={sendAPIRequestClick}
-                            title="Send dummy API request"
-                            color="#005500"
-                            accessibilityLabel="Send dummy API request"
-                            style={{padding:5}}
-                        />
+				<Button
+					onPress={printDebugMessage}
+					title="Print users to console"
+					color="#005500"
+					accessibilityLabel="Send dummy API request"
+					style={{padding:5}}
+				/>
       		</View>
     	);
   	}
 }
+

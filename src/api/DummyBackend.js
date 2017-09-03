@@ -1,40 +1,37 @@
+import User from "../entities/User";
+
 users = [];
 userGroups = [];
 habits = [];
 
-function sendAPIRequest(target_url) {
-    console.log("Requesting URL: " + target_url);
+users.push(new User(1, "Jakob"));
+users.push(new User(2, "Danne"));
+users.push(new User(3, "Johan"));
+users.push(new User(4, "Martin"));
 
-    fetch(target_url, {
-        method: "GET",
-        heads: {
-            "Content-Type": "application/json"
-        },
-        credentials: "dummy:dummypass"
-    })
-    .then(response => response.json())
-    .then(
-        function(responseData) {
-            console.log(responseData);
-            return responseData;
-        },
-        function(error) {
-            console.log("Problem with operation: " + error.message);
+export function getUserFromBackend(userID) {
+
+    const user_list = getUserList();
+    for (let i = 0; i < user_list.length; i++) {
+        let user = user_list[i];
+        if (user.userID === userID) {
+            return user;
         }
-    );
+    }
+
+    throw Error("Didn't find user with ID: " + userID);
 }
 
-export function sendAPIRequestClick(event) {
-    var target_url = "http://192.168.1.103/app/users/";
-    sendAPIRequest(target_url);
+export function addUserToBackend(user) {
+    users.push(user);
 }
 
-function getUsers() {
+export function getAllUsersFromBackend() {
     return users;
 }
 
-function addUser(user) {
-    users.push(user);
+export function removeUserFromList(userID) {
+
 }
 
 function removeUser(user) {
@@ -55,6 +52,11 @@ function removeUser(user) {
         return false;
     }
 }
+
+
+
+/* Not implemented yet */
+
 
 function addUserGroup(group) {
     userGroups.push(group);
