@@ -1,4 +1,5 @@
 import User from "../entities/User";
+import Habit from "../entities/Habit";
 
 users = [];
 userGroups = [];
@@ -8,6 +9,8 @@ users.push(new User(1, "Jakob"));
 users.push(new User(2, "Danne"));
 users.push(new User(3, "Johan"));
 users.push(new User(4, "Martin"));
+
+habits.push(new Habit(0, "First habit", "This is the original habit"));
 
 export function getUserFromBackend(userID) {
 
@@ -30,8 +33,42 @@ export function getAllUsersFromBackend() {
     return users;
 }
 
-export function removeUserFromList(userID) {
+export function addHabitToBackend(habit) {
+    habits.push(habit);
+}
 
+export function removeHabitFromBackend(habitID) {
+
+    let targetIndex = -1;
+    for (let i = 0; i < habits.length; i++) {
+        const habit = habits[i];
+        if (habit.habitID == habitID) {
+            targetIndex = i;
+            break;
+        }
+    }
+
+    if (targetIndex !== -1) {
+        habits.splice(targetIndex, 1);
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+export function getHabitFromBackend(habitID) {
+    for (let i = 0; i < habits.length; i++) {
+        const habit = habits[i];
+        if (habit.habitID == habitID) {
+            return habit;
+        }
+    }
+    throw new Error("Target habitID not found: " + habitID);
+}
+
+export function getAllHabitsFromBackend() {
+    return habits;
 }
 
 function removeUser(user) {
