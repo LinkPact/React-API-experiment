@@ -8,7 +8,6 @@ import {
     getAllHabitsFromBackend
 } from "./DummyBackend"
 
-
 export function getUser(userID) {
     return getUserFromBackend(userID);
 }
