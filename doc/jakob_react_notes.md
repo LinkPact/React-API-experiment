@@ -20,4 +20,6 @@
     * cd ..
     * react-native run-android
 
+# Resources
 
+* Straight-forward getting-started-with-project steps: https://medium.com/@tewolfe2/5-steps-to-setting-up-your-macbook-for-react-native-7b8b1019eb6d
