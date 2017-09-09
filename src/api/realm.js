@@ -7,7 +7,7 @@ import Realm from 'realm';
 // Example to trace: https://github.com/realm/realm-js/tree/master/examples/ReactExample
 
 class HabitEntry extends Realm.Object {}
-HabitEntry.HabitEntry = {
+HabitEntry.schema = {
     name: 'Todo',
     properties: {
         done: {type: 'bool', default: false},
@@ -25,4 +25,31 @@ Habit.schema = {
     },
 };
 
-export default new Realm({schema: [HabitEntry, Habit]});
+class Car extends Realm.Object {}
+Car.schema = {
+    name: 'Car',
+    properties: {
+        make: 'string',
+        model: 'string',
+        miles: {type: 'int', default: 0}
+    }
+};
+
+class Person extends Realm.Object {}
+Person.schema = {
+    name: 'Person',
+    properties: {
+        name:       'string',
+        birthday:   'date',
+        cars:       {type: 'list', objectType: 'Car'},
+        picture:    {type: 'data', optional: true},
+    }
+};
+
+// class Car extends Realm.Object {}
+// Car.schema = CarSchema;
+//
+// class Person extends Realm.Object {}
+// Person.schema = PersonSchema;
+
+export default new Realm({schema: [HabitEntry, Habit, Car, Person]});

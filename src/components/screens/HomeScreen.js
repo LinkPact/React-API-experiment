@@ -4,6 +4,7 @@ import {
   StackNavigator,
 } from 'react-navigation';
 import { printDebugMessage } from '../../api/DatabaseAPI';
+import { initRealmTest } from '../../api/RealmTest';
 
 export default class HomeScreen extends React.Component {
 	static navigationOptions = {
@@ -33,6 +34,13 @@ export default class HomeScreen extends React.Component {
 					title="Print users to console"
 					color="#005500"
 					accessibilityLabel="Send dummy API request"
+					style={{padding:5}}
+				/>
+				<Button
+					onPress={initRealmTest}
+					title="Realm test"
+					color="#005500"
+					accessibilityLabel="Realm test"
 					style={{padding:5}}
 				/>
       		</View>
