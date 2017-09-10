@@ -25,6 +25,42 @@ Habit.schema = {
     },
 };
 
+class Day extends Realm.Object {}
+Day.schema = {
+    name: 'Day',
+    properties: {
+        dayNum: 'int',
+        month: 'Month',
+        year: 'Year',
+        habitEntries: {type: 'list', objectType: 'HabitEntry'}
+    },
+};
+
+class Month extends Realm.Object {}
+Month.schema = {
+    name: 'Month',
+    properties: {
+        monthNum: 'int',
+        year: 'Year',
+        dayEntries: {type: 'list', objectType: 'Day'}
+    },
+};
+
+class Year extends Realm.Object {}
+Year.schema = {
+    name: 'Year',
+    properties: {
+        yearNum: 'int',
+        monthEntries: {type: 'list', objectType: 'Month'}
+    },
+};
+
+//Not sure what to store here now, but seems to make sense to have it?
+class Calendar extends Realm.Object {}
+Calendar.schema = {
+    name: 'Calendar'
+}
+
 class Car extends Realm.Object {}
 Car.schema = {
     name: 'Car',
@@ -52,4 +88,4 @@ Person.schema = {
 // class Person extends Realm.Object {}
 // Person.schema = PersonSchema;
 
-export default new Realm({schema: [HabitEntry, Habit, Car, Person]});
+export default new Realm({schema: [HabitEntry, Habit, Day, Month, Year, Calendar, Car, Person]});
