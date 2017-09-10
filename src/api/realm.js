@@ -8,7 +8,7 @@ import Realm from 'realm';
 
 class HabitEntry extends Realm.Object {}
 HabitEntry.schema = {
-    name: 'Todo',
+    name: 'HabitEntry',
     properties: {
         done: {type: 'bool', default: false},
         text: 'string',
@@ -20,8 +20,7 @@ Habit.schema = {
     name: 'Habit',
     properties: {
         name: 'string',
-        creationDate: 'date',
-        items: {type: 'list', objectType: 'Todo'},
+        creationDate: 'date'
     },
 };
 
@@ -58,34 +57,15 @@ Year.schema = {
 //Not sure what to store here now, but seems to make sense to have it?
 class Calendar extends Realm.Object {}
 Calendar.schema = {
-    name: 'Calendar'
-}
-
-class Car extends Realm.Object {}
-Car.schema = {
-    name: 'Car',
-    properties: {
-        make: 'string',
-        model: 'string',
-        miles: {type: 'int', default: 0}
-    }
+    name: 'Calendar',
+    properties: {}
 };
 
-class Person extends Realm.Object {}
-Person.schema = {
-    name: 'Person',
-    properties: {
-        name:       'string',
-        birthday:   'date',
-        cars:       {type: 'list', objectType: 'Car'},
-        picture:    {type: 'data', optional: true},
-    }
-};
 
-// class Car extends Realm.Object {}
-// Car.schema = CarSchema;
-//
-// class Person extends Realm.Object {}
-// Person.schema = PersonSchema;
+// When we want to retain data between migrations, we should setup a proper migration schema:
+// https://realm.io/docs/javascript/latest/index.html#schema-version
+export default new Realm(
+    {schema: [HabitEntry, Habit, Year, Month, Day, Calendar],
+    schemaVersion: 2
+});
 
-export default new Realm({schema: [HabitEntry, Habit, Day, Month, Year, Calendar, Car, Person]});
