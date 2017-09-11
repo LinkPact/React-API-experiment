@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Navigator, Button } from 'react-native';
 import {
 	StackNavigator,
 } from 'react-navigation';
-import { Calendar } from 'react-native-calendars';
+import HabitCalendar from '../../entities/HabitCalendar';
 
 export default class CalendarScreen extends React.Component {
   static navigationOptions = {
@@ -14,33 +14,24 @@ export default class CalendarScreen extends React.Component {
     	return (
     		<View style={{flex: 1}}>
     			<Text>Group Calendar</Text>
-    			<Calendar 
-				   markedDates={{
-				    '2017-09-01': [{startingDay: true, color: 'orange'}],
-				    '2017-09-02': [{marked: true, color: 'orange'}],
-     				 '2017-09-03': [{endingDay: true, color: 'orange'}],
-				     '2017-09-04': [{startingDay: true, color: 'green'}, {endingDay: true, color: 'green'}]}}
-				     markingType={'interactive'}
-
-    			/>
+    			<HabitCalendar />
 	     		<Button
 		        	title="Create new habit"
-		        	//onPress={() =>
-		          	//	navigate('GroupCalendar')
-		        	//}
+		        	onPress={() =>
+		          		navigate('GroupCalendar')
+		        	}
 	      		/>
 	      		<Button
 		        	title="My Calendar"
-		        	//onPress={() =>
-		          	//	navigate('GroupCalendar')
-		        	//}
+		        	onPress={() =>
+		          		navigate('GroupCalendar')
+		        	}
 	      		/>
 	      		<Button
 		        	title="Options"
-		        	//Leave calendar (to create a new one)
-		        	//onPress={() =>
-		          	//	navigate('GroupCalendar')
-		        	//}
+		        	onPress={() =>
+		          	  navigate('GroupCalendar')
+		        	}
 	      		/>
       		</View>
     	);
