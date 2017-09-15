@@ -1,6 +1,6 @@
-class HabitEntry {
+export default class HabitEntry {
 
-    constructor(year, day) {
+    constructor(year, month, day) {
         this.year = year;
         this.day = day;
         this.entryID = this.year + this.day;
@@ -9,5 +9,9 @@ class HabitEntry {
 
     setStatus = function(status) {
         this.status = status;
+    }
+
+    static toString (h) {
+        return ''+h.year+'-'+h.month+'-'+h.day;
     }
 }

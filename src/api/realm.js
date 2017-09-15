@@ -12,6 +12,10 @@ HabitEntry.schema = {
     properties: {
         done: {type: 'bool', default: false},
         text: 'string',
+        calendar: 'string',
+        day: 'int',
+        month: 'int',
+        year: 'int'
     },
 };
 
@@ -29,7 +33,9 @@ Habit.schema = {
 class Calendar extends Realm.Object {}
 Calendar.schema = {
     name: 'Calendar',
-    properties: {}
+    properties: {
+        HabitEntries: {type:'list', objectType:'HabitEntry'}
+    }
 };
 
 
@@ -37,6 +43,6 @@ Calendar.schema = {
 // https://realm.io/docs/javascript/latest/index.html#schema-version
 export default new Realm(
     {schema: [HabitEntry, Habit, Calendar],
-    schemaVersion: 3
+    schemaVersion: 5
 });
 
