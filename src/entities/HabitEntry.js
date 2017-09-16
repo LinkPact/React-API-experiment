@@ -10,8 +10,4 @@ export default class HabitEntry {
     setStatus = function(status) {
         this.status = status;
     }
-
-    static toString (h) {
-        return ''+h.year+'-'+h.month+'-'+h.day;
-    }
 }

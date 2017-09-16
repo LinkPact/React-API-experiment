@@ -8,14 +8,17 @@ class HabitCalendar extends Calendar {
         const habitEntries = HabitCalendarService.findAllHabits();
         const calendarHabitEntries = {};
         habitEntries.forEach(h => {
-            calendarHabitEntries[HabitEntry.toString(h)] = [{marked: true, color: 'green'}]
+            calendarHabitEntries[HabitCalendar.habitToString(h)] = [{marked: true, color: 'green'}]
         });
-        console.log(calendarHabitEntries)
         return calendarHabitEntries;
     }
     render() {
         const markedDates = this.getHabitEntries();
         return (<Calendar markedDates={markedDates} markingType={'interactive'} />)
+    }
+
+    static habitToString (h) {
+        return ''+h.year+'-'+h.month+'-'+h.day;
     }
 }
 
