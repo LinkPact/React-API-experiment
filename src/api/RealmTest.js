@@ -1,4 +1,8 @@
+'use strict';
+
 import realm from "./realm";
+import Realm from "realm";
+
 
 export function initRealmTest() {
 
@@ -38,5 +42,21 @@ export function initRealmTest() {
     const habits = realm.objects('Habit');
 
     console.log("Number of habits: " + habits.length);
+
+    Realm.Sync.User.login('http://localhost:9080', 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W', (error, user) => {
+
+        if (!error) {
+            Realm.open({
+                sync: {
+                    user: user,
+                    url: 'realm://object-server-url:9080/~/my-realm',
+                },
+                schema: [HabitEntry, Habit, Calendar]
+            }).then(realm => {
+                /* ... */
+            });
+        }
+
+    });
 }
 
