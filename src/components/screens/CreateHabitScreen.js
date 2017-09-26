@@ -34,6 +34,7 @@ export default class CreateHabitScreen extends React.Component {
       console.log("Habit: " + key);
       console.log("name: " + habits[key].name);
       console.log("description: " + habits[key].description);
+      console.log("date: " + habits[key].creationDate);
       console.log("\n");
     }
       navigate("Calendar");
