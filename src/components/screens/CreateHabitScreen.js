@@ -31,7 +31,10 @@ export default class CreateHabitScreen extends React.Component {
       
     const habits = realm.objects('Habit');
     for (const key in habits) {
-        console.log("Habit: " + key);
+      console.log("Habit: " + key);
+      console.log("name: " + habits[key].name);
+      console.log("description: " + habits[key].description);
+      console.log("\n");
     }
       navigate("Calendar");
     } else {
