@@ -24,6 +24,7 @@ Habit.schema = {
     name: 'Habit',
     properties: {
         name: 'string',
+        description: 'string',
         creationDate: 'date'
     },
 };
@@ -43,6 +44,6 @@ Calendar.schema = {
 // https://realm.io/docs/javascript/latest/index.html#schema-version
 export default new Realm(
     {schema: [HabitEntry, Habit, Calendar],
-    schemaVersion: 5
+    schemaVersion: 6
 });
 

@@ -18,7 +18,7 @@ export default class CalendarScreen extends React.Component {
 	     		<Button
 		        	title="Create new habit"
 		        	onPress={() =>
-		          		navigate('GroupCalendar')
+		          		navigate('CreateHabit')
 		        	}
 	      		/>
 	      		<Button
