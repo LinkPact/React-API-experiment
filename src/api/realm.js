@@ -59,8 +59,13 @@ UserIDs.schema = {
 
 // When we want to retain data between migrations, we should setup a proper migration schema:
 // https://realm.io/docs/javascript/latest/index.html#schema-version
-export default new Realm(
-    {schema: [HabitEntry, Habit, Calendar, UserIDs, UserID],
-    schemaVersion: 10
-});
+// export default new Realm({
+//     schema: [HabitEntry, Habit],
+//     // schema: [HabitEntry, Habit, Calendar, UserID, UserIDs],
+//     schemaVersion: 15
+// });
 
+export default new Realm(
+    {schema: [HabitEntry, Habit, Calendar],
+        schemaVersion: 16
+    });

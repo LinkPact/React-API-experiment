@@ -3,17 +3,28 @@
 // import realm from "./realm";
 import Realm from "realm";
 
-import { HabitEntry, Habit, Calendar, UserIDs } from "./realm";
+import { HabitEntry, Habit, Calendar } from "./realm";
+// import { HabitEntry, Habit, Calendar, UserID, UserIDs } from "./realm";
 
 
 export function initRealmTest() {
 
     console.log("Running initRealmTest");
 
+    // Next steps:
+    // - Understand user-based system. Are we successfully syncing now?
+    // - Understand difference between user-based system and admin-based.
+    // - Use this understanding to get workable initial admin sync and permission assignment working
+    // - Figure out how to use userids to find other realms
+    // - Figure out how to allow read permissions between realms
+    // - Figure out how to retrieve information in controlled fashion from parallel realms
+    // - Retrieve this information in controlled fashion
+
 
     const REALM_SERVER = 'http://10.0.3.2:9080';
 
-    globalRealmSetup(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
+    userLoginSync(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
+    // globalRealmSetup(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
 
 
 }
@@ -26,29 +37,30 @@ function userLoginSync(server, user, pass) {
         console.log("Error: " +  error);
 
         if (!error) {
-            console.log("No error!");
-
-            Realm.open({
-                sync: {
-                    user: user,
-                    url: 'realm://object-server-url:9080/global_realm',
-                },
-                schema: [HabitEntry, Habit, Calendar]
-            }).then(realm => {
-                // return callback(null, realm);
-                return realm;
-            });
+            console.log("Login succeeded");
 
             // Realm.open({
             //     sync: {
             //         user: user,
-            //         url: 'realm://object-server-url:9080/~/my-realm',
+            //         url: 'realm://object-server-url:9080/global_realm',
             //     },
             //     schema: [HabitEntry, Habit, Calendar]
             // }).then(realm => {
             //     // return callback(null, realm);
             //     return realm;
             // });
+
+            Realm.open({
+                sync: {
+                    user: user,
+                    url: 'realm://object-server-url:9080/~/my-realm',
+                },
+                schema: [HabitEntry, Habit, Calendar]
+            }).then(realm => {
+                console.log("Realm successfully opened");
+                // return callback(null, realm);
+                return realm;
+            });
         }
         else {
             // console.log("Error: " + new Error(error.message));
@@ -113,8 +125,10 @@ function globalRealmSetup (realm_server, admin_email, admin_pass) {
                         user: adminUser,
                         url: 'realm://object-server-url:9080/globalRealm',
                     },
-                    schema: [UserIDs]
+                    schema: [HabitEntry, Habit, Calendar]
                 });
+
+                console.log("First realm sync succeeded");
 
                 // Apply permissions to everyone
                 const managementRealm = user.openManagementRealm();
@@ -138,7 +152,8 @@ function globalRealmSetup (realm_server, admin_email, admin_pass) {
                 });
             }
             else {
-                console.log("Following error encountered: " + error);
+                console.log("Following error encountered: " + error.message);
+                console.log("Stack: " + error.stack);
             }
         })
 }
