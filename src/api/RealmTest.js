@@ -6,6 +6,7 @@ import Realm from "realm";
 import { HabitEntry, Habit, Calendar } from "./realm";
 // import { HabitEntry, Habit, Calendar, UserID, UserIDs } from "./realm";
 
+import realmContainer from "./realm-container";
 
 export function initRealmTest() {
 
@@ -21,16 +22,36 @@ export function initRealmTest() {
     // - Retrieve this information in controlled fashion
 
 
-    const REALM_SERVER = 'http://10.0.3.2:9080';
+    console.log("--- Attempting realmContainer login");
+    realmContainer.test("TESTINPUT");
+    // realmContainer.initialize('jakob.willforss@immun.lth.se', 'realm');
+    realmContainer.login('jakob.willforss@immun.lth.se', 'realm');
 
-    userLoginSync(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
+    // sleep(1000);
+
+    // console.log(realmContainer.realm);
+    // console.log("--- Attempt ended (successful or not) ---");
+
+
+    // const REALM_SERVER = 'http://10.0.3.2:9080';
+    // console.log("Before login attempt");
+    // let sync_realm = userLoginSync(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
+    // console.log("Received realm: " + sync_realm);
     // globalRealmSetup(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
+}
 
+export function checkRealmTest() {
+    console.log("Checking realm test");
+    console.log(realmContainer.realm);
+}
 
+function sleep(milliseconds) {
+    let currentTime = new Date().getTime();
+    while (currentTime + milliseconds >= new Date().getTime()) {}
 }
 
 function userLoginSync(server, user, pass) {
-    Realm.Sync.User.login(server, 'jakob.willforss@immun.lth.se', 'realm', (error, user) => {
+    Realm.Sync.User.login('http://10.0.3.2:9080', 'jakob.willforss@immun.lth.se', 'realm', (error, user) => {
 
         console.log("Attempting login!");
         console.log("User: " + user);
@@ -53,7 +74,8 @@ function userLoginSync(server, user, pass) {
             Realm.open({
                 sync: {
                     user: user,
-                    url: 'realm://object-server-url:9080/~/my-realm',
+                    url: 'realm://10.0.3.2:9080/~/my-realm',
+                    // url: 'realm://object-server-url:9080/~/my-realm',
                 },
                 schema: [HabitEntry, Habit, Calendar]
             }).then(realm => {
