@@ -15,7 +15,8 @@ HabitEntry.schema = {
         calendar: 'string',
         day: 'int',
         month: 'int',
-        year: 'int'
+        year: 'int',
+        dateString: 'string'
     },
 };
 
@@ -44,6 +45,6 @@ Calendar.schema = {
 // https://realm.io/docs/javascript/latest/index.html#schema-version
 export default new Realm(
     {schema: [HabitEntry, Habit, Calendar],
-    schemaVersion: 6
+    schemaVersion: 7
 });
 
