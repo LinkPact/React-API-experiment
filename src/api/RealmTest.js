@@ -7,22 +7,9 @@ import { HabitEntry, Habit, Calendar } from "./realm";
 // import { HabitEntry, Habit, Calendar, UserID, UserIDs } from "./realm";
 
 import realmContainer from "./realm-container";
+import { globalRealmSetup } from "./realm-container";
 
 export function initRealmTest() {
-
-    // let testball = {
-    //     // that: this,
-    //     param: null,
-    //     outer_value: "outer",
-    //     assign_param: (value) => {
-    //         // that.param = value;
-    //         console.log(this.outer_value);
-    //     }
-    // };
-
-    // testball.assign_param("value!");
-    // console.log(testball.param);
-
 
     console.log("Running initRealmTest");
 
@@ -35,31 +22,23 @@ export function initRealmTest() {
     // - Figure out how to retrieve information in controlled fashion from parallel realms
     // - Retrieve this information in controlled fashion
 
-    console.log(realmContainer);
-    realmContainer.init_test("hello!");
-    console.log(realmContainer.get_testparam());
+    globalRealmSetup('jakob.willforss@hotmail.com', 'admin');
 
-    console.log("--- Attempting realmContainer login");
-    realmContainer.test("TESTINPUT");
-    // realmContainer.initialize('jakob.willforss@immun.lth.se', 'realm');
-    realmContainer.login('jakob.willforss@immun.lth.se', 'realm');
-
-    let my_realm = realmContainer.get_realm();
-    console.log("My realm: " + my_realm);
-
-    // sleep(1000);
-    realmContainer.show_realm_object();
-    console.log("My realm: " + realmContainer.realm);
-
-
-    // console.log(realmContainer.realm);
-    // console.log("--- Attempt ended (successful or not) ---");
-
+    // console.log(realmContainer);
+    // realmContainer.init_test("hello!");
+    // console.log(realmContainer.get_testparam());
+    //
+    // console.log("--- Attempting realmContainer login");
+    // realmContainer.login('jakob.willforss@hotmail.com', 'admin');
+    // // realmContainer.login('jakob.willforss@immun.lth.se', 'realm');
+    //
+    // let my_realm = realmContainer.get_realm();
+    // console.log("My realm: " + my_realm);
 }
 
 export function checkRealmTest() {
     console.log("Checking realm test");
-    console.log(realmContainer.realm);
+    console.log(realmContainer.get_realm());
 }
 
 function sleep(milliseconds) {
@@ -146,55 +125,6 @@ function writeHabitEntry() {
     const habits = realm.objects('Habit');
 
     console.log("--- Number of habits: " + habits.length + " ---");
-}
-
-
-function globalRealmSetup (realm_server, admin_email, admin_pass) {
-
-    console.log("globalRealmSetup");
-
-    Realm.Sync.User.login(realm_server, admin_email, admin_pass,
-        (error, adminUser) => {
-            if (!error) {
-
-                console.log("Admin user synced without errors");
-
-                let realm = new Realm({
-                    sync: {
-                        user: adminUser,
-                        url: 'realm://object-server-url:9080/globalRealm',
-                    },
-                    schema: [HabitEntry, Habit, Calendar]
-                });
-
-                console.log("First realm sync succeeded");
-
-                // Apply permissions to everyone
-                const managementRealm = user.openManagementRealm();
-                console.log("Management realm: " + managementRealm);
-
-                let permObj;
-                managementRealm.write(() => {
-                    permObj = managementRealm.create('PermissionChange', {
-                        id: 1,   // implement something that creates a unique id.
-                        // id: generateUniqueId(),   // implement something that creates a unique id.
-                        createdAt: new Date(),
-                        updatedAt: new Date(),
-                        userId: '*', // To apply the permission changes for all Users authorized with the Object Server, specify a userId value of *.
-                        realmUrl: 'realm://object-server-url:9080/globalRealm',
-                    });
-                });
-
-                // Listen for `PermissionChange` object to be processed
-                managementRealm.objects('PermissionChange').filtered('id = $0', permObj.id).addListener((objects, changes) => {
-                    console.log("Permission Status: " + permObj.statusMessage);
-                });
-            }
-            else {
-                console.log("Following error encountered: " + error.message);
-                console.log("Stack: " + error.stack);
-            }
-        })
 }
 
 

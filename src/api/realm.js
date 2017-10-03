@@ -67,5 +67,5 @@ UserIDs.schema = {
 
 export default new Realm(
     {schema: [HabitEntry, Habit, Calendar],
-        schemaVersion: 21
+        schemaVersion: 22
     });
