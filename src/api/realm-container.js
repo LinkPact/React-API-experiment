@@ -27,8 +27,10 @@ export default {
     },
     realm: null,
     initialize: (email, password) => {
+        console.log("realmContainer: registering user");
         Realm.Sync.User.register(SERVER_PATH, email, password, (error, user) => {
             if (!error) {
+                console.log("realmContainer: registration went through without errors");
                 this.realm = new Realm({
                     sync: {
                         user: user,
@@ -46,24 +48,45 @@ export default {
         console.log("realmContainer: attempting login");
         Realm.Sync.User.login(SERVER_PATH, email, password, (error, user) => {
             if (!error) {
-                console.log("realmContainer: login successful");
-                this.realm = new Realm({
+                console.log("realmContainer: login successful, syncing to: " + "realm://10.0.3.2:9080/~/userRealm");
+                this.realm = Realm.open({
                     sync: {
                         user: user,
-                        url: USER_REALM,
+                        url: "realm://10.0.3.2:9080/~/userRealm",
                     },
                     schema: [HabitEntry, Habit, Calendar]
+                }).then(realm => {
+                    return realm;
                 });
-                console.log("Realm within: " + this.realm);
+
             }
             else {
                 console.log("realmContainer: login unsuccessful");
                 console.log(error);
             }
+
+            console.log("Realm object: " + this.realm);
         })
+    },
+    show_realm_object: () => {
+        console.log("Running show_realm_object");
+        console.log(this.realm)
     },
     test: (input) => {console.log("Input to test is: " + input)},
 }
 
+
+// Realm.open({
+//     sync: {
+//         user: user,
+//         url: 'realm://10.0.3.2:9080/~/my-realm',
+//         // url: 'realm://object-server-url:9080/~/my-realm',
+//     },
+//     schema: [HabitEntry, Habit, Calendar]
+// }).then(realm => {
+//     console.log("Realm successfully opened");
+//     // return callback(null, realm);
+//     return realm;
+// });
 
 

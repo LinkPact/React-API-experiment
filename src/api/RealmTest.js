@@ -39,7 +39,6 @@ export function initRealmTest() {
     realmContainer.init_test("hello!");
     console.log(realmContainer.get_testparam());
 
-
     console.log("--- Attempting realmContainer login");
     realmContainer.test("TESTINPUT");
     // realmContainer.initialize('jakob.willforss@immun.lth.se', 'realm');
@@ -49,16 +48,13 @@ export function initRealmTest() {
     console.log("My realm: " + my_realm);
 
     // sleep(1000);
+    realmContainer.show_realm_object();
+    console.log("My realm: " + realmContainer.realm);
+
 
     // console.log(realmContainer.realm);
     // console.log("--- Attempt ended (successful or not) ---");
 
-
-    // const REALM_SERVER = 'http://10.0.3.2:9080';
-    // console.log("Before login attempt");
-    // let sync_realm = userLoginSync(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
-    // console.log("Received realm: " + sync_realm);
-    // globalRealmSetup(REALM_SERVER, 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W');
 }
 
 export function checkRealmTest() {
