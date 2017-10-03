@@ -10,6 +10,20 @@ import realmContainer from "./realm-container";
 
 export function initRealmTest() {
 
+    // let testball = {
+    //     // that: this,
+    //     param: null,
+    //     outer_value: "outer",
+    //     assign_param: (value) => {
+    //         // that.param = value;
+    //         console.log(this.outer_value);
+    //     }
+    // };
+
+    // testball.assign_param("value!");
+    // console.log(testball.param);
+
+
     console.log("Running initRealmTest");
 
     // Next steps:
@@ -21,11 +35,18 @@ export function initRealmTest() {
     // - Figure out how to retrieve information in controlled fashion from parallel realms
     // - Retrieve this information in controlled fashion
 
+    console.log(realmContainer);
+    realmContainer.init_test("hello!");
+    console.log(realmContainer.get_testparam());
+
 
     console.log("--- Attempting realmContainer login");
     realmContainer.test("TESTINPUT");
     // realmContainer.initialize('jakob.willforss@immun.lth.se', 'realm');
     realmContainer.login('jakob.willforss@immun.lth.se', 'realm');
+
+    let my_realm = realmContainer.get_realm();
+    console.log("My realm: " + my_realm);
 
     // sleep(1000);
 

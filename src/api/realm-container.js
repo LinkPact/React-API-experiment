@@ -9,7 +9,22 @@ SERVER_PATH = 'http://' + ADDRESS;
 USER_REALM = 'realm://' + ADDRESS + '/~/my_realm';
 GLOBAL_REALM = 'realm://' + ADDRESS + '/global_realm';
 
+let realm = null;
+let testparam = null;
+
 export default {
+    // realm: null,
+    // testparam: null,
+    init_test: (value) => {
+        console.log("Initializing to: " + value);
+        testparam = value;
+    },
+    get_testparam: () => {
+        return testparam;
+    },
+    get_realm: () => {
+        return realm;
+    },
     realm: null,
     initialize: (email, password) => {
         Realm.Sync.User.register(SERVER_PATH, email, password, (error, user) => {
@@ -39,6 +54,7 @@ export default {
                     },
                     schema: [HabitEntry, Habit, Calendar]
                 });
+                console.log("Realm within: " + this.realm);
             }
             else {
                 console.log("realmContainer: login unsuccessful");
