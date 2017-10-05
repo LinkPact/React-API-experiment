@@ -11,84 +11,18 @@ import { globalRealmSetup } from "./realm-container";
 
 export function initRealmTest() {
 
+    let user1 = {"email":"user1@test.com", "pass":"user1"};
+    let user2 = {"email":"user2@test.com", "pass":"user2"};
+    let user3 = {"email":"user3@test.com", "pass":"user3"};
+    // let users = {user1:user1, user2:user2, user3:user3};
+
     console.log("Running initRealmTest");
 
-    // Next steps:
-    // - Understand user-based system. Are we successfully syncing now?
-    // - Understand difference between user-based system and admin-based.
-    // - Use this understanding to get workable initial admin sync and permission assignment working
-    // - Figure out how to use userids to find other realms
-    // - Figure out how to allow read permissions between realms
-    // - Figure out how to retrieve information in controlled fashion from parallel realms
-    // - Retrieve this information in controlled fashion
+    realmContainer.login('user1@test.com', 'user1');
+    realmContainer.login('user2@test.com', 'user2');
+    realmContainer.login('user3@test.com', 'user3');
 
-    globalRealmSetup('jakob.willforss@hotmail.com', 'admin');
-
-    // console.log(realmContainer);
-    // realmContainer.init_test("hello!");
-    // console.log(realmContainer.get_testparam());
-    //
-    // console.log("--- Attempting realmContainer login");
-    // realmContainer.login('jakob.willforss@hotmail.com', 'admin');
-    // // realmContainer.login('jakob.willforss@immun.lth.se', 'realm');
-    //
-    // let my_realm = realmContainer.get_realm();
-    // console.log("My realm: " + my_realm);
 }
-
-export function checkRealmTest() {
-    console.log("Checking realm test");
-    console.log(realmContainer.get_realm());
-}
-
-function sleep(milliseconds) {
-    let currentTime = new Date().getTime();
-    while (currentTime + milliseconds >= new Date().getTime()) {}
-}
-
-function userLoginSync(server, user, pass) {
-    Realm.Sync.User.login('http://10.0.3.2:9080', 'jakob.willforss@immun.lth.se', 'realm', (error, user) => {
-
-        console.log("Attempting login!");
-        console.log("User: " + user);
-        console.log("Error: " +  error);
-
-        if (!error) {
-            console.log("Login succeeded");
-
-            // Realm.open({
-            //     sync: {
-            //         user: user,
-            //         url: 'realm://object-server-url:9080/global_realm',
-            //     },
-            //     schema: [HabitEntry, Habit, Calendar]
-            // }).then(realm => {
-            //     // return callback(null, realm);
-            //     return realm;
-            // });
-
-            Realm.open({
-                sync: {
-                    user: user,
-                    url: 'realm://10.0.3.2:9080/~/my-realm',
-                    // url: 'realm://object-server-url:9080/~/my-realm',
-                },
-                schema: [HabitEntry, Habit, Calendar]
-            }).then(realm => {
-                console.log("Realm successfully opened");
-                // return callback(null, realm);
-                return realm;
-            });
-        }
-        else {
-            // console.log("Error: " + new Error(error.message));
-            return new Error(error.message);
-            // return callback(new Error(error.message));
-        }
-
-    });
-}
-
 
 function writeHabitEntry() {
     realm.write(() => {
