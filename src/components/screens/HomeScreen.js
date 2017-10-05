@@ -41,6 +41,12 @@ export default class HomeScreen extends React.Component {
 					onPress={() => navigate('RealmTestScreen')}
 					accessibilityLabel="Realm Test Screen"
 				/>
+				<Button
+					title="Login"
+					color="#005500"
+					onPress={() => navigate('Login')}
+					accessibilityLabel="Login"
+				/>
       		</View>
     	);
   	}

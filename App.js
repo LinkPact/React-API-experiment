@@ -6,6 +6,7 @@ import HomeScreen from './src/components/screens/HomeScreen';
 import CreateCalendarScreen from './src/components/screens/CreateCalendarScreen';
 import CreateHabitScreen from './src/components/screens/CreateHabitScreen';
 import RealmTestScreen from './src/components/screens/RealmTestScreen';
+import LoginScreen from './src/components/screens/LoginScreen';
 import {
 	StackNavigator,
 } from 'react-navigation';
@@ -16,5 +17,6 @@ const App = StackNavigator({
   CreateCalendar: { screen: CreateCalendarScreen },
   CreateHabit: {screen: CreateHabitScreen},
   RealmTestScreen: {screen: RealmTestScreen},
+  Login: {screen: LoginScreen},
 });
 export default App;
