@@ -1,15 +1,30 @@
 'use strict';
 
-import realm from "./realm";
+// import realm from "./realm";
 import Realm from "realm";
 
 import { HabitEntry, Habit, Calendar } from "./realm";
+// import { HabitEntry, Habit, Calendar, UserID, UserIDs } from "./realm";
 
+import realmContainer from "./realm-container";
+import { globalRealmSetup } from "./realm-container";
 
 export function initRealmTest() {
 
+    let user1 = {"email":"user1@test.com", "pass":"user1"};
+    let user2 = {"email":"user2@test.com", "pass":"user2"};
+    let user3 = {"email":"user3@test.com", "pass":"user3"};
+    // let users = {user1:user1, user2:user2, user3:user3};
+
     console.log("Running initRealmTest");
 
+    realmContainer.login('user1@test.com', 'user1');
+    realmContainer.login('user2@test.com', 'user2');
+    realmContainer.login('user3@test.com', 'user3');
+
+}
+
+function writeHabitEntry() {
     realm.write(() => {
         realm.create('Habit', {
             name: 'Honda',
@@ -44,53 +59,6 @@ export function initRealmTest() {
     const habits = realm.objects('Habit');
 
     console.log("--- Number of habits: " + habits.length + " ---");
-
-    const users = Realm.Sync.User.all;
-    for (const key in users) {
-        console.log("User: " + key);
-    }
-
-    Realm.Sync.User.login('http://127.0.0.1:9080', 'jakob.willforss@hotmail.com', 'ahbrJGZS2w8W', (error, user) => {
-
-        console.log("Attempting login!");
-
-        if (!error) {
-            console.log("No error!");
-            Realm.open({
-                sync: {
-                    user: user,
-                    url: 'realm://object-server-url:9080/~/my-realm',
-                },
-                schema: [HabitEntry, Habit, Calendar]
-            }).then(realm => {
-                // return callback(null, realm);
-                return realm;
-            });
-        }
-        else {
-            console.log("Error: " + callback(new Error(error.message)));
-            return new Error(error.message);
-            // return callback(new Error(error.message));
-        }
-
-    });
 }
 
-// Realm.Sync.User[action](config.auth_uri, username, password,
-//     (error, user) => {
-//         if (error) {
-//             return callback(new Error(error.message));
-//         } else {
-//             realm = new Realm({
-//                 schema: [Task, TaskList],
-//                 sync: {
-//                     user,
-//                     url: config.db_uri
-//                 },
-//                 path: config.db_path
-//             });
-//             return callback(null, realm); // TODO errors
-//         }
-//     }
-// );
 

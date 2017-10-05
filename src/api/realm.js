@@ -41,10 +41,28 @@ Calendar.schema = {
 };
 
 
+// Not sure if this is needed, but objectType 'string' didn't work for the UserIDs
+class UserID extends Realm.Object {}
+UserID.schema = {
+    name: 'UserID',
+    properties: {
+        id: 'string'
+    },
+};
+
+class UserIDs extends Realm.Object {}
+UserIDs.schema = {
+    name: 'UserIDs',
+    properties: {
+        UserIDs: {type:'list', objectType:'UserID'}
+    }
+};
+
+
 // When we want to retain data between migrations, we should setup a proper migration schema:
 // https://realm.io/docs/javascript/latest/index.html#schema-version
 export default new Realm(
     {schema: [HabitEntry, Habit, Calendar],
-    schemaVersion: 7
+    schemaVersion: 5
 });
 
