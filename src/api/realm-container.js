@@ -136,21 +136,3 @@ export function globalRealmSetup (admin_email, admin_pass) {
         })
 }
 
-
-
-
-
-// Realm.open({
-//     sync: {
-//         user: user,
-//         url: 'realm://10.0.3.2:9080/~/my-realm',
-//         // url: 'realm://object-server-url:9080/~/my-realm',
-//     },
-//     schema: [HabitEntry, Habit, Calendar]
-// }).then(realm => {
-//     console.log("Realm successfully opened");
-//     // return callback(null, realm);
-//     return realm;
-// });
-
-

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Navigator, Button } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
-import { printDebugMessage } from '../../api/DatabaseAPI';
 import { initRealmTest } from '../../api/RealmTest';
 
 export default class HomeScreen extends React.Component {
@@ -29,13 +28,6 @@ export default class HomeScreen extends React.Component {
 		          		navigate('CreateCalendar')
 		        	}
 	      		/>
-				<Button
-					onPress={printDebugMessage}
-					title="Print users to console"
-					color="#005500"
-					accessibilityLabel="Send dummy API request"
-					style={{padding:5}}
-				/>
 				<Button
 					onPress={initRealmTest}
 					title="Realm test"
