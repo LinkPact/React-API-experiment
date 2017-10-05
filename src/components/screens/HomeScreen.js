@@ -35,6 +35,12 @@ export default class HomeScreen extends React.Component {
 					accessibilityLabel="Realm test"
 					style={{padding:5}}
 				/>
+				<Button
+					title="Realm Test Screen"
+					color="#005500"
+					onPress={() => navigate('RealmTestScreen')}
+					accessibilityLabel="Realm Test Screen"
+				/>
       		</View>
     	);
   	}
